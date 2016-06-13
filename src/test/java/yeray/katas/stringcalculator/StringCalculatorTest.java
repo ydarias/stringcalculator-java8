@@ -2,6 +2,7 @@ package yeray.katas.stringcalculator;
 
 import org.junit.Before;
 import org.junit.Test;
+import yeray.katas.stringcalculator.exceptions.NegativeNumberException;
 
 import static org.junit.Assert.*;
 
@@ -43,6 +44,11 @@ public class StringCalculatorTest {
     @Test
     public void sumsInputsUsingCustomDelimiter() throws Exception {
         assertEquals(3, calculator.add("//;\n1;2"));
+    }
+
+    @Test(expected = NegativeNumberException.class)
+    public void negativeNumbersGenerateException() throws Exception {
+        calculator.add("1,-2,3");
     }
 
 }

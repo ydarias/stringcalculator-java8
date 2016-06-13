@@ -1,5 +1,7 @@
 package yeray.katas.stringcalculator;
 
+import yeray.katas.stringcalculator.exceptions.NegativeNumberException;
+
 import java.util.Arrays;
 
 public class StringCalculator {
@@ -17,8 +19,17 @@ public class StringCalculator {
         String[] operands = parsedInput.split(DEFAULT_DELIMITER);
 
         return Arrays.stream(operands)
-                .mapToInt(Integer::valueOf)
+                .mapToInt(this::toPositiveIntegerValue)
                 .sum();
+    }
+
+    private int toPositiveIntegerValue(String input) {
+        int value = Integer.valueOf(input);
+
+        if (value < 0)
+            throw new NegativeNumberException();
+
+        return value;
     }
 
 }
