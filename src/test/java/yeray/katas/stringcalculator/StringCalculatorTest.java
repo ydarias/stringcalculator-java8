@@ -35,4 +35,9 @@ public class StringCalculatorTest {
         assertEquals(14, calculator.add("1,2,5,6"));
     }
 
+    @Test
+    public void sumsInputsUsingNewLineAsDelimiter() throws Exception {
+        assertEquals(6, calculator.add("1\n2,3"));
+    }
+
 }
