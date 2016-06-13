@@ -56,4 +56,9 @@ public class StringCalculatorTest {
         assertEquals(4, calculator.add("1,1001,3"));
     }
 
+    @Test
+    public void sumsInputsWithAnyLengthCustomDelimiter() throws Exception {
+        assertEquals(6, calculator.add("//**\n1**2**3"));
+    }
+
 }
