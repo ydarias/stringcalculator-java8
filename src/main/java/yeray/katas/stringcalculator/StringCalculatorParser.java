@@ -1,34 +1,41 @@
 package yeray.katas.stringcalculator;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class DelimiterParser {
+public class StringCalculatorParser {
 
-    public String parse(String input, String defaultDelimiter) {
-        if (input.startsWith("//"))
-            return parseCustomDelimiter(input, defaultDelimiter);
+    private static final String DEFAULT_DELIMITER = ",";
 
-        return input.replace("\n", defaultDelimiter);
+    public String[] getOperands(String input) {
+        String parsedInput = replaceInputByDefaultDelimiter(input);
+
+        return parsedInput.split(DEFAULT_DELIMITER);
     }
 
-    private String parseCustomDelimiter(String input, String defaultDelimiter) {
+    private String replaceInputByDefaultDelimiter(String input) {
+        if (input.startsWith("//"))
+            return parseCustomDelimiters(input, DEFAULT_DELIMITER);
+
+        return input.replace("\n", DEFAULT_DELIMITER);
+    }
+
+    private String parseCustomDelimiters(String input, String defaultDelimiter) {
         Pattern pattern = Pattern.compile("//(.*?)\n(.*)");
         Matcher matcher = pattern.matcher(input);
 
         matcher.find();
 
         String operandsString = matcher.group(2);
-        for (String customDelimiter : parseCustomDelimiters(matcher.group(1)))
+        for (String customDelimiter : customDelimitersAsTokens(matcher.group(1)))
             operandsString = operandsString.replace(customDelimiter, defaultDelimiter);
 
         return operandsString;
     }
 
-    private List<String> parseCustomDelimiters(String customDelimiters) {
+    private List<String> customDelimitersAsTokens(String customDelimiters) {
         if (customDelimiters.contains("[")) {
             return Arrays.asList(
                 customDelimiters

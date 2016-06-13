@@ -6,17 +6,13 @@ import java.util.Arrays;
 
 public class StringCalculator {
 
-    private static final String DEFAULT_DELIMITER = ",";
-
-    private DelimiterParser delimiterParser = new DelimiterParser();
+    private StringCalculatorParser parser = new StringCalculatorParser();
 
     public int add(String input) {
         if (input.length() == 0)
             return 0;
 
-        String parsedInput = delimiterParser.parse(input, DEFAULT_DELIMITER);
-
-        String[] operands = parsedInput.split(DEFAULT_DELIMITER);
+        String[] operands = parser.getOperands(input);
 
         return Arrays.stream(operands)
                 .mapToInt(this::toPositiveIntegerValue)
