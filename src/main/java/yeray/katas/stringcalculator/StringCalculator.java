@@ -1,6 +1,8 @@
 package yeray.katas.stringcalculator;
 
 import java.util.Arrays;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class StringCalculator {
 
@@ -20,7 +22,16 @@ public class StringCalculator {
     }
 
     private String parseDelimiters(String input) {
-        return input.replace("\n", DEFAULT_DELIMITER);
+        Pattern pattern = Pattern.compile("//(.)\n(.*)");
+        Matcher matcher = pattern.matcher(input);
+        if (matcher.find()) {
+            String operandsString = matcher.group(2);
+            String customDelimiter = matcher.group(1);
+
+            return operandsString.replace(customDelimiter, DEFAULT_DELIMITER);
+        } else {
+            return input.replace("\n", DEFAULT_DELIMITER);
+        }
     }
 
 }
