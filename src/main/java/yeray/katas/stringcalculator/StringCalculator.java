@@ -20,6 +20,7 @@ public class StringCalculator {
 
         return Arrays.stream(operands)
                 .mapToInt(this::toPositiveIntegerValue)
+                .filter(operand -> operand <= 1000)
                 .sum();
     }
 

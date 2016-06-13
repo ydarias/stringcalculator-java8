@@ -51,4 +51,9 @@ public class StringCalculatorTest {
         calculator.add("1,-2,3");
     }
 
+    @Test
+    public void numbersLargerThanOneThousandAreIgnored() throws Exception {
+        assertEquals(4, calculator.add("1,1001,3"));
+    }
+
 }
