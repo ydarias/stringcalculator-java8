@@ -36,16 +36,13 @@ public class StringCalculatorParser {
     }
 
     private List<String> customDelimitersAsTokens(String customDelimiters) {
-        if (customDelimiters.contains("[")) {
-            return Arrays.asList(
-                customDelimiters
-                        .replaceAll("\\]\\[", "|")
-                        .replaceAll("\\[", "")
-                        .replaceAll("\\]", "")
-                        .split("\\|"));
-        } else {
-            return Arrays.asList(customDelimiters);
-        }
+        String[] tokens =  customDelimiters
+                .replaceAll("\\]\\[", "|")
+                .replaceAll("\\[", "")
+                .replaceAll("\\]", "")
+                .split("\\|");
+
+        return Arrays.asList(tokens);
     }
 
 }
