@@ -1,15 +1,18 @@
 package yeray.katas.stringcalculator;
 
+import java.util.Arrays;
+
 public class StringCalculator {
 
     public int add(String input) {
-        if (input.length() == 3)
-            return Integer.valueOf(input.substring(0, 1)) + Integer.valueOf(input.substring(2, 3));
+        if (input.length() == 0)
+            return 0;
 
-        if (input.length() == 1)
-            return Integer.valueOf(input);
+        String[] operands = input.split(",");
 
-        return 0;
+        return Arrays.stream(operands)
+                .mapToInt(Integer::valueOf)
+                .sum();
     }
 
 }

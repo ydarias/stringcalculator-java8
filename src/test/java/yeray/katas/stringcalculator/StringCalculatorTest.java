@@ -30,4 +30,9 @@ public class StringCalculatorTest {
         assertEquals(3, calculator.add("1,2"));
     }
 
+    @Test
+    public void sumsInputsOfAnyLength() throws Exception {
+        assertEquals(14, calculator.add("1,2,5,6"));
+    }
+
 }
