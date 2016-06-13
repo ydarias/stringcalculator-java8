@@ -66,4 +66,9 @@ public class StringCalculatorTest {
         assertEquals(6, calculator.add("//[*][%]\n1*2%3"));
     }
 
+    @Test
+    public void sumsInputUsingAnyAmountOfCustomDelimitersWithAnyLength() throws Exception {
+        assertEquals(16, calculator.add("//[**][%+][:]\n1**2%+3:10"));
+    }
+
 }
