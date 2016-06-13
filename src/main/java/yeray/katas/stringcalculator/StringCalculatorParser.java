@@ -10,19 +10,19 @@ public class StringCalculatorParser {
     private static final String DEFAULT_DELIMITER = ",";
 
     public String[] getOperands(String input) {
-        String parsedInput = replaceInputByDefaultDelimiter(input);
+        String parsedInput = replaceDelimitersByDefaultDelimiter(input);
 
         return parsedInput.split(DEFAULT_DELIMITER);
     }
 
-    private String replaceInputByDefaultDelimiter(String input) {
+    private String replaceDelimitersByDefaultDelimiter(String input) {
         if (input.startsWith("//"))
-            return parseCustomDelimiters(input, DEFAULT_DELIMITER);
+            return replaceCustomDelimitersByDefaultDelimiter(input);
 
         return input.replace("\n", DEFAULT_DELIMITER);
     }
 
-    private String parseCustomDelimiters(String input, String defaultDelimiter) {
+    private String replaceCustomDelimitersByDefaultDelimiter(String input) {
         Pattern pattern = Pattern.compile("//(.*?)\n(.*)");
         Matcher matcher = pattern.matcher(input);
 
@@ -30,7 +30,7 @@ public class StringCalculatorParser {
 
         String operandsString = matcher.group(2);
         for (String customDelimiter : customDelimitersAsTokens(matcher.group(1)))
-            operandsString = operandsString.replace(customDelimiter, defaultDelimiter);
+            operandsString = operandsString.replace(customDelimiter, DEFAULT_DELIMITER);
 
         return operandsString;
     }
